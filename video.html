@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en" class="bg-zinc-900 text-white">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FreakLeaks - Video Details</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+    .zoom-hover {
+        transition: transform 0.3s ease;
+    }
+    .zoom-hover:hover {
+        transform: scale(1.05);
+    }
+    </style>
+</head>
+<body class="font-sans">
+    <header class="flex items-center justify-between p-4 border-b border-zinc-700">
+    <a href="index.html" class="text-2xl font-bold text-red-500 hover:underline">FreakLeaks</a>
+    </header>
+
+    <div class="max-w-7xl mx-auto p-4 grid grid-cols-1 lg:grid-cols-3 gap-6">
+    
+    <div class="lg:col-span-2 space-y-4">
+        
+        <div class="relative">
+        <video id="video-player" controls class="w-full h-auto rounded-xl" poster="">
+            <source id="video-source" src="" type="video/mp4">
+            Your browser does not support HTML5 video.
+        </video>
+        <div id="video-error" class="hidden absolute inset-0 bg-black/80 flex items-center justify-center text-red-500 font-bold p-4 rounded-xl">
+            Error loading video. Please check console.
+        </div>
+        </div>
+
+        
+        <div class="flex flex-col md:flex-row justify-between items-start md:items-center">
+        <h2 id="video-title" class="text-xl font-bold"></h2>
+        <div class="text-right">
+            <p class="text-sm text-zinc-400">
+            <span class="inline-block align-middle">👁️</span> <span id="video-views">0</span> views
+            </p>
+        </div>
+        </div>
+
+        
+        <div class="bg-zinc-800 p-4 rounded-xl space-y-4">
+        <h3 class="text-lg font-semibold">Purchase Options</h3>
+        <div class="grid md:grid-cols-1 gap-4">
+            <div class="bg-zinc-900 p-4 rounded">
+            <h4 class="text-red-500 font-semibold mb-2">🔴 Direct Contact</h4>
+            <p class="text-sm mb-3">Contact the seller directly via Telegram</p>
+            <button id="contact-seller" class="w-full text-center bg-zinc-700 hover:bg-zinc-600 text-white py-2 rounded font-semibold">
+                🎧 Contact Seller
+            </button>
+            </div>
+        </div>
+        </div>
+
+        
+        <div class="bg-zinc-800 p-4 rounded-xl text-sm">
+        <h3 class="text-lg font-semibold mb-2">📄 Video Description</h3>
+        <p id="video-description" class="text-zinc-300">
+            
+        </p>
+        </div>
+    </div>
+
+    
+    <aside class="space-y-4">
+        <h3 class="text-lg font-semibold">Suggested Videos</h3>
+        <div id="suggested-videos" class="space-y-4"></div>
+    </aside>
+    </div>
+
+    
+    <footer class="bg-zinc-900 border-t border-zinc-700 py-8 text-center text-zinc-400 mt-10">
+    <h2 class="text-xl font-semibold text-red-500 mb-2">FreakLeaks</h2>
+    <p class="mb-4">Your premium adult content platform.</p>
+    <p class="mt-8 text-xs">&copy; 2025 FreakLeaks. For adults 18+ only.</p>
+    </footer>
+
+    
+    <script>
+    const videoTitles = [
+        "DESIRE GARCIA FOLDER 📁","ASH LEAKS","ANITA LEAKS","ABBI FOLDER","⚠BABY ASHLEE CONTENT⚠",
+        "AVA LEAK","FATHER AND DAUGHTER","🚨🚨HIGH SCHOOL SHOTS🚨🚨","😈JUJU BOOKS FOLDER 🔥","𝐌𝐎𝐍 𝐚𝐧𝐝 𝐒𝐎𝐍",
+        "IVANKA AND BROTHER 🤤🍑","PYT CHANNELS ✅","Zoo Content🙈🍑","SNAPGOD FULL EDITION",
+        "Black Pyt t33ns 😊","‼BLACKMAIL FOLDER📁‼","ELLE GOODMAN FOLDER 🍑‼","ENGLISH T33NS C🅿‼",
+        "HIGH SCHOOL SHOTS 🫦🥵","BANANA GIRLS 🍌","INCEST FOLDERS 🥵",
+        "BRAZZERS COMPLETE COLLECTION 📁🥵🔥","MONKEY APP 🙈🍑","OMEGLE TOP TIER FOLDER ‼🥵","DARKZADIE LEAKS"
+    ];
+
+    const videoDescriptions = [
+        "Desiree Garcia folder 📁 Snapchat hacking tools snap leak Complete folder",
+        "ASH LEAKS Content of Teens Link of Teens Hot girl Amazing videos",
+        "ANITA LEAKS Content of Tenns Hot gril Mega link Amazing videos",
+        "⚠️Abbi Folder Snapchat hacking tools leak blackmail Training vids",
+        "⚠️Baby Ashlee Leaks content 10GB BEST LEAK AVAILABLE",
+        "content of Teens Mega link Hot gril Amazing videos",
+        "Content oF INCEST ✅ Mega link ✅ Hot Father and Daughter ✅ Amazing videos ✅",
+        "🚨🚨HIGH SCHOOL SHOTS🚨🚨BIG PROMO OVER 100Vids TEENS",
+        "🚨 NEW VIRAL FOLDER ALERT 🚨😈 JUJU BOOKS😈 Young girl that likes having fun with older guys More then 4GB of content for you",
+        "𝐌𝐎𝐍 𝐚𝐧𝐝 𝐒𝐎𝐍 1000 videos Lifetime access",
+        "+60 Video +10gb Folder 40min + Videos Exclusive Folder : YOU WON'T FIND THIS ANYWHERE ELSE",
+        "BIG PROMO SKI PYT 13-17 SKI HIGHSCHOOL SKI BLACK PYT SKI WHITE PYT SKI LIGHTSKIN PYT SKI LATINA PYT SKI NYC PYT SKI PHILLY PYT SKI EUROPE PYT",
+        "NEW FOLDER ZOO FOLDER 100% homemade content Diverse animals 6GB and more than 200 videos",
+        "OVER 60000 VIDEOS OVER 500GB IN TOTAL MORE THAN 200 BLACKMAIL VIDEOS LEAKED SNAP OF REAL GIRLS BEST SELLERS IN THE SAME FOLDER (LIZZY, IZZY, AMELIA BLONDE, SAVANNAH AND MORE…) MY COMPLETE FOLDER",
+        "NEW FOLDERS AVAILABLE 13-17 year olds black teens Black teens MORE THAN 1200 Vids 3 FOLDERS WITH 200Gb in Total",
+        "OVER 6000 VIDEOS 120GB IN TOTAL LEAKED SNAP OF REAL GIRLS",
+        "NEW FOLDER AVAILABLE ELLE GOODMAN ZIP FOLDER",
+        "ENGLISH T33NS OVER 500 VIDEOS 50 GB IN TOTAL MORE THAN 200 BLACKMAIL VIDEOS COMPLETE FOLDER",
+        "HIGHSCHOOL MORE THAN 1000VIDS 60GB OF CONTENT HARD FUCK HARD SUCK BITCH SCHOOL MORE THAN ONE FOLDER",
+        "TWO BANANAS FOR TWO GIRLS TWO HOURS LONG VIDEOS T33NS",
+        "REAL VIDEOS COLLECTION THIS FOLDER GOES CRAZY CP MOM - SON MOM - DAUGTH3ER FATHER - DAUGHT3ER",
+        "BRAZZERS COMPLETE COLLECTION largest collection of Brazzers videos 2TB of content Long videos (no short videos)",
+        "MonkeyApp BOOTY or BOOB'S NEW FOLDER biggest folder so far more than 1200 videos monkey app game hot teens on monkey app",
+        "OMEGLE TOP TIER FOLDER biggest folder so far more than 1200 videos omegle game monkey app hot teens on Omegle",
+        "Famous TikTok teenager leaks after a fight Leak of the moment and rare Complete folder more than (40GB)"
+    ];
+
+    const id = parseInt(new URLSearchParams(window.location.search).get("id")) || 1;
+    const title = videoTitles[id - 1] || "Video Not Found";
+    
+    const description = (videoDescriptions[id - 1] || "Description not available for this video.").split('✅').join('<br>');
+    const views = Math.floor(Math.random() * 10000);
+    const image = `img/${id}.jpg`;
+
+    
+    const videoPlayer = document.getElementById("video-player");
+    const videoSource = document.getElementById("video-source");
+    const videoError = document.getElementById("video-error");
+
+    
+    videoPlayer.setAttribute("poster", image);
+    videoSource.setAttribute("src", `vid/${id}.mp4`);
+    
+    
+    videoPlayer.addEventListener('error', function() {
+        videoError.classList.remove('hidden');
+        console.error("Video error:", videoPlayer.error);
+    });
+
+    
+    videoPlayer.load();
+
+    
+    document.getElementById("video-title").innerHTML = `${title} <span class='text-yellow-400'>⭐</span>`;
+    document.getElementById("video-views").textContent = views;
+    document.getElementById("video-description").innerHTML = description; 
+
+    
+    const suggestedVideos = videoTitles.map((title, index) => ({
+        id: index + 1,
+        title,
+        image: `img/${index + 1}.jpg`
+    })).filter(v => v.id !== id).sort(() => 0.5 - Math.random()).slice(0, 3);
+
+    const container = document.getElementById("suggested-videos");
+    container.innerHTML = "";
+    suggestedVideos.forEach(video => {
+        container.innerHTML += `
+        <a href="video.html?id=${video.id}" class="block bg-zinc-800 zoom-hover rounded-xl overflow-hidden shadow-lg">
+            <div class="flex h-[260px]">
+            <img src="${video.image}" class="w-48 h-full object-cover" alt="${video.title}">
+            <div class="p-5 flex flex-col justify-between">
+                <p class="font-semibold text-lg">${video.title}</p>
+            </div>
+            </div>
+        </a>
+        `;
+    });
+
+    // Contact Seller Button Functionality
+    document.getElementById("contact-seller").addEventListener("click", function() {
+        const message = `👋 ADMM__HEREEE🔥🔥🍑 \n\nI'm interested in purchasing this content:\n"${title}"\n\nCould you please:\n1. Confirm availability\n2. Share payment details\n3. Explain delivery process\n\nThank you! 😊`;
+        
+        const telegramUrl = `https://t.me/BUY_HERRE?text=${encodeURIComponent(message)}`;
+        window.open(telegramUrl, '_blank');
+    });
+    
+    </script>
+</body>
+</html>

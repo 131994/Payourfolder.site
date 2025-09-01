@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FreakLeaks</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="font-sans bg-zinc-900 text-white">
+  <!-- Header -->
+  <header class="flex items-center justify-between p-4 border-b border-zinc-700">
+    <h1 class="text-2xl font-bold text-red-500">FreakLeaks</h1>
+  </header>
+
+  <!-- Search and Filters -->
+  <section class="p-4 max-w-7xl mx-auto space-y-4">
+    <div class="flex justify-center">
+      <div class="relative w-1/2">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 absolute left-3 top-2.5 text-zinc-400" viewBox="0 0 24 24" fill="none">
+          <path d="M21 21l-5.2-5.2m0 0A7.5 7.5 0 105.2 5.2a7.5 7.5 0 0010.6 10.6z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+        <input id="search" type="text" placeholder="Search videos..." class="w-full pl-10 py-2 text-sm rounded bg-zinc-800 border border-zinc-700 text-white placeholder-zinc-400 outline-none focus:border-red-500 hover:border-red-500">
+      </div>
+    </div>
+
+    <div class="flex flex-wrap items-center justify-between gap-2 mt-4">
+      <h1 id="page-info" class="text-3xl font-extrabold text-white">Page 1 (1–12 of 25 videos)</h1>
+      <p id="videos-found" class="text-base text-zinc-400">12 videos found</p>
+    </div>
+
+    <div class="flex flex-col md:flex-row md:items-center md:justify-between mt-4">
+      <div></div>
+      <div class="flex items-center gap-2">
+        <span class="text-sm text-zinc-400">Sort by:</span>
+        <button id="filterRecent" class="px-4 py-2 rounded bg-red-500 text-white text-base flex items-center gap-2">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+            <path d="M10 2a8 8 0 108 8h-1.5a6.5 6.5 0 11-6.5-6.5V2z" />
+          </svg>
+          Recent
+        </button>
+        <button id="filterViews" class="px-4 py-2 rounded bg-zinc-800 text-white text-base flex items-center gap-2">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 4.5c-7.5 0-12 7.5-12 7.5s4.5 7.5 12 7.5 12-7.5 12-7.5-4.5-7.5-12-7.5zm0 12a4.5 4.5 0 110-9 4.5 4.5 0 010 9z"/>
+          </svg>
+          Views
+        </button>
+        <button id="filterPriceHigh" class="px-4 py-2 rounded bg-zinc-800 text-white text-base flex items-center gap-2">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M12 1a1 1 0 011 1v1.07c2.282.25 4 2.195 4 4.43 0 2.538-2.03 4.375-4.732 4.911L11 12v1h1a1 1 0 110 2h-1v1a1 1 0 11-2 0v-1.07c-2.282-.25-4-2.195-4-4.43 0-2.538 2.03-4.375 4.732-4.911L13 6V5h-1a1 1 0 110-2h1V2a1 1 0 011-1z"/>
+          </svg>
+          Price High
+        </button>
+        <button id="filterPriceLow" class="px-4 py-2 rounded bg-zinc-800 text-white text-base flex items-center gap-2">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M12 23a1 1 0 01-1-1v-1.07c-2.282-.25-4-2.195-4-4.43 0-2.538 2.03-4.375 4.732-4.911L13 12v-1h-1a1 1 0 110-2h1V8a1 1 0 112 0v1.07c2.282.25 4 2.195 4 4.43 0 2.538-2.03 4.375-4.732 4.911L11 18v1h1a1 1 0 110 2h-1v1a1 1 0 01-1 1z"/>
+          </svg>
+          Price Low
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Purchase Popup -->
+  <div id="purchase-popup" class="fixed bottom-5 left-5 w-80 bg-white text-zinc-900 px-4 py-3 rounded-xl shadow-lg hidden z-50 flex items-center gap-3">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" fill="#229ED9" class="w-6 h-6">
+      <path d="M120 0C53.7 0 0 53.7 0 120s53.7 120 120 120 120-53.7 120-120S186.3 0 120 0zm53.5 80.2l-19 89.6c-1.4 6.1-4.9 7.7-9.9 4.8l-27.5-20.3-13.3 12.8c-1.5 1.5-2.7 2.7-5.4 2.7l1.9-27.1 49.3-44.5c2.1-1.9-.4-3-3.2-1.1l-61 38.3-26.3-8.2c-5.7-1.8-5.8-5.7 1.2-8.4l102.7-39.6c4.8-1.8 9.1 1.1 7.5 8.1z" />
+    </svg>
+    <div>
+      <p class="text-sm font-semibold"><span id="popup-name">John</span> bought <span id="popup-folder">Folder X</span> via Telegram</p>
+    </div>
+  </div>
+
+  <!-- Cards -->
+  <main id="card-container" class="p-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 max-w-7xl mx-auto"></main>
+
+  <!-- Pagination -->
+  <div id="pagination" class="flex justify-center space-x-2 py-4"></div>
+
+  <!-- Footer -->
+  <footer class="bg-zinc-900 border-t border-zinc-700 py-8 text-center text-zinc-400">
+    <h2 class="text-xl font-semibold text-red-500 mb-2">FreakLeaks</h2>
+    <p class="mb-4">Your premium adult content platform.</p>
+    <p class="mt-8 text-xs">&copy; 2025 FreakLeaks. Only for adults over 18.</p>
+  </footer>
+
+  <!-- Script -->
+  <script>
+    const videoTitles = [
+      "DESIRE GARCIA FOLDER 📁","ASH LEAKS","ANITA LEAKS","ABBI FOLDER","⚠BABY ASHLEE CONTENT⚠",
+      "AVA LEAK","FATHER AND DAUGHTER","🚨🚨HIGH SCHOOL SHOTS🚨🚨","😈JUJU BOOKS FOLDER 🔥","𝐌𝐎𝐍 𝐚𝐧𝐝 𝐒𝐎𝐍",
+      "IVANKA AND BROTHER 🤤🍑","PYT CHANNELS ✅","Zoo Content🙈🍑","SNAPGOD FULL EDITION",
+      "Black Pyt t33ns 😊","‼BLACKMAIL FOLDER📁‼","ELLE GOODMAN FOLDER 🍑‼","ENGLISH T33NS C🅿‼",
+      "HIGH SCHOOL SHOTS 🫦🥵","BANANA GIRLS 🍌","INCEST FOLDERS 🥵",
+      "BRAZZERS COMPLETE COLLECTION 📁🥵🔥","MONKEY APP 🙈🍑","OMEGLE TOP TIER FOLDER ‼🥵", "DARKZADIE"
+    ];
+
+    const folderNames = [...videoTitles];
+    const names = [
+      "John", "Luke", "Carl", "Hazael", "Robert", "Anna",
+      "Ian", "Isabella", "Mark", "Steven", "Satoshi", "Yuna",
+      "David", "Chloe", "Liam", "Emma", "Kwame", "Jade", "Ahmed", "Pablo",
+      "Michael", "Camila", "Hans", "Greta", "Peter", "Sophie", "Victor", "Anya",
+      "Aisha", "Tariq", "Juan", "Luisa", "Chen", "Mei", "Arjun", "Priya"
+    ];
+
+    const cards = Array.from({ length: 25 }).map((_, i) => ({
+      title: videoTitles[i],
+      time: `${10 + i % 10}s`,
+      image: `img/${(i % 25) + 1}.jpg`,
+      label: i % 5 === 0 ? "HOT" : (i % 4 === 0 ? "NEW" : ""),
+      views: Math.floor(Math.random() * 1000),
+      price: Math.floor(Math.random() * 50) + 10,
+      createdAt: Date.now() - i * 100000
+    }));
+
+    const PER_PAGE = 12;
+    let currentPage = 1;
+    let currentFilter = "recent";
+
+    const container = document.getElementById("card-container");
+    const searchInput = document.getElementById("search");
+    const filterRecentButton = document.getElementById("filterRecent");
+    const filterViewsButton = document.getElementById("filterViews");
+    const filterPriceHighButton = document.getElementById("filterPriceHigh");
+    const filterPriceLowButton = document.getElementById("filterPriceLow");
+    const pagination = document.getElementById("pagination");
+    const pageInfo = document.getElementById("page-info");
+    const videosFoundInfo = document.getElementById("videos-found");
+
+    function getFilteredData() {
+      let filtered = [...cards];
+      const keyword = searchInput.value.toLowerCase();
+      if (keyword) {
+        filtered = filtered.filter(c => c.title.toLowerCase().includes(keyword));
+      }
+
+      if (currentFilter === "priceHigh") filtered.sort((a, b) => b.price - a.price);
+      if (currentFilter === "priceLow") filtered.sort((a, b) => a.price - b.price);
+      if (currentFilter === "views") filtered.sort((a, b) => b.views - a.views);
+      if (currentFilter === "recent") filtered.sort((a, b) => b.createdAt - a.createdAt);
+
+      return filtered;
+    }
+
+    function paginate(data, page) {
+      const start = (page - 1) * PER_PAGE;
+      const end = start + PER_PAGE;
+      return data.slice(start, end);
+    }
+
+    function renderPagination(totalItems) {
+      const pages = Math.ceil(totalItems / PER_PAGE);
+      pagination.innerHTML = "";
+      for (let i = 1; i <= pages; i++) {
+        const btn = document.createElement("button");
+        btn.textContent = i;
+        btn.className = `px-3 py-1 rounded ${i === currentPage ? 'bg-red-500' : 'bg-zinc-700'} text-white`;
+        btn.onclick = () => {
+          currentPage = i;
+          render();
+        };
+        pagination.appendChild(btn);
+      }
+    }
+
+    function renderCards(data) {
+      container.innerHTML = "";
+      data.forEach((card, index) => {
+        const id = (currentPage - 1) * PER_PAGE + index + 1;
+        container.innerHTML += `
+          <a href="video.html?id=${id}" class="block bg-zinc-800 rounded-xl overflow-hidden shadow-md transition hover:scale-[1.01]">
+            <div class="relative">
+              <img src="${card.image}" alt="${card.title}" class="w-full h-48 object-cover">
+              ${card.label ? `<div class="absolute top-2 left-2 bg-red-600 text-xs font-bold px-2 py-1 rounded">${card.label}</div>` : ""}
+            </div>
+            <div class="p-4">
+              <h2 class="text-lg font-semibold">${card.title}</h2>
+              <div class="flex justify-between items-center mt-2 text-sm text-zinc-400">
+                <span>🕒 ${card.time}</span>
+                <span>👁️ ${card.views} views</span>
+              </div>
+            </div>
+          </a>
+        `;
+      });
+    }
+
+    function render() {
+      const filtered = getFilteredData();
+      const paginated = paginate(filtered, currentPage);
+      renderCards(paginated);
+      renderPagination(filtered.length);
+
+      const start = (currentPage - 1) * PER_PAGE + 1;
+      const end = Math.min(start + PER_PAGE - 1, filtered.length);
+      pageInfo.textContent = `Page ${currentPage} (${start}–${end} of ${filtered.length} videos)`;
+      videosFoundInfo.textContent = `${filtered.length} videos found`;
+
+      filterRecentButton.classList.toggle("bg-red-500", currentFilter === "recent");
+      filterRecentButton.classList.toggle("bg-zinc-800", currentFilter !== "recent");
+      filterViewsButton.classList.toggle("bg-red-500", currentFilter === "views");
+      filterViewsButton.classList.toggle("bg-zinc-800", currentFilter !== "views");
+      filterPriceHighButton.classList.toggle("bg-red-500", currentFilter === "priceHigh");
+      filterPriceHighButton.classList.toggle("bg-zinc-800", currentFilter !== "priceHigh");
+      filterPriceLowButton.classList.toggle("bg-red-500", currentFilter === "priceLow");
+      filterPriceLowButton.classList.toggle("bg-zinc-800", currentFilter !== "priceLow");
+    }
+
+    function showPurchasePopup() {
+      const popup = document.getElementById("purchase-popup");
+      const popupName = document.getElementById("popup-name");
+      const popupFolder = document.getElementById("popup-folder");
+
+      const name = names[Math.floor(Math.random() * names.length)];
+      const folder = folderNames[Math.floor(Math.random() * folderNames.length)];
+
+      popupName.textContent = name;
+      popupFolder.textContent = folder;
+
+      popup.classList.remove("hidden");
+      popup.classList.add("animate-bounce", "ring-2", "ring-blue-400");
+
+      setTimeout(() => {
+        popup.classList.add("hidden");
+        popup.classList.remove("animate-bounce", "ring-2", "ring-blue-400");
+      }, 6000);
+    }
+
+    searchInput.addEventListener("input", () => { currentPage = 1; render(); });
+    filterRecentButton.addEventListener("click", () => { currentFilter = "recent"; currentPage = 1; render(); });
+    filterViewsButton.addEventListener("click", () => { currentFilter = "views"; currentPage = 1; render(); });
+    filterPriceHighButton.addEventListener("click", () => { currentFilter = "priceHigh"; currentPage = 1; render(); });
+    filterPriceLowButton.addEventListener("click", () => { currentFilter = "priceLow"; currentPage = 1; render(); });
+
+    setInterval(showPurchasePopup, 20000);
+    render();
+  </script>
+</body>
+</html>
